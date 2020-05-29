@@ -1,14 +1,15 @@
 const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
 const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'King', 'Queen', 'Ace']
 let deck = []
+let dealer = []
 let hands = []
 
 const randInt = (max) => Math.floor(Math.random() * Math.floor(max))
 
 function drawCard() {
-    const int = randInt(deck.length)
-    const card = deck[int]
-    if (int > -1) deck.splice(int, 1)
+    const indx = randInt(deck.length)
+    const card = deck[indx]
+    if (indx > -1) deck.splice(indx, 1)
     return card
 } 
 
@@ -20,7 +21,12 @@ function buildDeck() {
     console.log(deck)
 }
 
+function drawHand() {
+    hands.push([`Hand ${hands.length + 1}`, [drawCard(), drawCard()]])
+}
+
 buildDeck()
-console.log(drawCard(), deck.length)
-console.log(drawCard(), deck.length)
-console.log(drawCard(), deck.length)
+drawHand()
+drawHand()
+drawHand()
+console.log(hands)
