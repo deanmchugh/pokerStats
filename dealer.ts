@@ -2,14 +2,10 @@ import Deck from './deck'
 import Player from './player'
 
 class Dealer {
-    currentDeck = new Deck
-    player = new Player
+    _currentDeck = new Deck
 
     drawCard() {
-        const idx: number = Math.floor(Math.random() * Math.floor(this.currentDeck.deck.length))
-        const card = this.currentDeck.deck[idx]
-        if (idx > -1) this.currentDeck.deck.splice(idx, 1)
-        return card
+        return this._currentDeck.deck.shift()
     } 
 
     dealHands(players: Array<Player>) {
@@ -17,18 +13,16 @@ class Dealer {
         players.forEach(currentPlayer => currentPlayer.addCard(this.drawCard()))
     }
 
-    dealFlop() {
-        let flop = []
+    dealFlop(dealtCards: Array<string>) {
         this.drawCard()
         for (let i = 0; i < 3; i++) {
-            flop.push(this.drawCard())
+            dealtCards.push(this.drawCard())
         }
-        return flop
     }
 
-    dealTurnRiver() {
+    dealTurnRiver(dealtCards: Array<string>) {
         this.drawCard()
-        return this.drawCard()
+        dealtCards.push(this.drawCard())
     }
 }
 

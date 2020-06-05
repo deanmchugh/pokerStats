@@ -1,20 +1,29 @@
 import Player from './player'
 import Dealer from './dealer'
 
-const dealer = new Dealer
-const player1 = new Player
-const player2 = new Player
-const player3 = new Player
+class Table {
+    constructor(numOfPlayers: number) {
+        this.createPlayers(numOfPlayers)
+    }
 
-let players = [player1, player2, player3]
+    dealer = new Dealer
+    players: Array<Player> = []
+    tableCards: Array<string> = []
 
-console.log(dealer.currentDeck.deck.length)
-dealer.dealHands(players)
-console.log(player1.hand, player2.hand, player3.hand)
-console.log(dealer.currentDeck.deck.length)
-console.log(dealer.dealFlop())
-console.log(dealer.currentDeck.deck.length)
-console.log(dealer.dealTurnRiver())
-console.log(dealer.currentDeck.deck.length)
-console.log(dealer.dealTurnRiver())
-console.log(dealer.currentDeck.deck.length)
+    createPlayers(num: number) {
+        for (let i = 0; i < num; i++) {
+            this.players.push(new Player)
+        }
+    }
+
+    dealGame() {
+        this.dealer.dealHands(this.players)
+        this.dealer.dealFlop(this.tableCards)
+        this.dealer.dealTurnRiver(this.tableCards)
+        this.dealer.dealTurnRiver(this.tableCards)
+    }
+
+    showCards = () => console.log(this.players, this.tableCards) 
+}
+
+export default Table
