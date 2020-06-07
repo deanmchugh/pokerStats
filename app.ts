@@ -1,8 +1,14 @@
 import Table from './table'
 
-const table = new Table(5)
+function runGame() {
+    console.log('pressed')
+}
 
-table.dealGame()
+while (true) {
+    this.addEventListener('keypress', e => {
+        if (e.key === ' ') runGame()
+    })
+}
 
-table.showCards()
+
 

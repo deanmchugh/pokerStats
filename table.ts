@@ -16,11 +16,22 @@ class Table {
         }
     }
 
-    dealGame() {
-        this.dealer.dealHands(this.players)
-        this.dealer.dealFlop(this.tableCards)
-        this.dealer.dealTurnRiver(this.tableCards)
-        this.dealer.dealTurnRiver(this.tableCards)
+    dealGame(stage: string) {
+        switch(stage) {
+            case stage = 'dealHands':
+                this.dealer.dealHands(this.players)
+                break
+            case stage = 'dealFlop':
+                this.dealer.dealFlop(this.tableCards)
+                break
+            case stage = 'dealTurn':
+                this.dealer.dealTurnRiver(this.tableCards)
+                break
+            case stage = 'dealRiver':
+                this.dealer.dealTurnRiver(this.tableCards)
+                break
+            default: console.log('enter stage')
+        }
     }
 
     showCards = () => console.log(this.players, this.tableCards) 
